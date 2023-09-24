@@ -8,6 +8,12 @@ function rotateText() {
         const nextCase = rotatorCases[(activeIndex + 1) % rotatorCases.length];
         currentCase.classList.remove('rotator__case_active');
         nextCase.classList.add('rotator__case_active');
+
+        const speed = nextCase.dataset.speed;
+        const color = nextCase.dataset.color;   
+        nextCase.style.transitionDuration = `${speed}ms`;
+        nextCase.style.color = color;
+
         activeIndex = (activeIndex + 1) % rotatorCases.length;
     };
 }
