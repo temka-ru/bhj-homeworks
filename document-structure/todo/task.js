@@ -6,30 +6,31 @@ tasksForm.addEventListener('submit', addTask);
 
 function addTask(event) {
     event.preventDefault();
-
     const taskText = taskInput.value.trim();
-
     if (taskText !== '') {
-        const taskElement = document.createElement('div');
-        taskElement.classList.add('task');
-        
-        const taskTitle = document.createElement('div');
-        taskTitle.classList.add('task__title');
-        taskTitle.textContent = taskText;
-        taskElement.appendChild(taskTitle);
-
-        const removeButton = document.createElement('a');
-        removeButton.classList.add('task__remove');
-        removeButton.innerHTML = '&times;';
-        taskElement.appendChild(removeButton);
-
-        removeButton.addEventListener('click', removeTask);
-
+        const taskElement = createTaskElement(taskText);
         tasksList.appendChild(taskElement);
         saveTasks();
-
         taskInput.value = '';
     }
+}
+
+function createTaskElement(taskText) {
+    const taskElement = document.createElement('div');
+    taskElement.classList.add('task');
+    
+    const taskTitle = document.createElement('div');
+    taskTitle.classList.add('task__title');
+    taskTitle.textContent = taskText;
+    taskElement.appendChild(taskTitle);
+    
+    const removeButton = document.createElement('a');
+    removeButton.classList.add('task__remove');
+    removeButton.innerHTML = '&times;';
+    taskElement.appendChild(removeButton);
+    removeButton.addEventListener('click', removeTask);
+    
+    return taskElement;
 }
 
 function removeTask(event) {
@@ -50,21 +51,7 @@ function restoreTasks() {
     const savedTasks = JSON.parse(localStorage.getItem('tasks'));
     if (savedTasks) {
         savedTasks.forEach((taskText) => {
-        const taskElement = document.createElement('div');
-        taskElement.classList.add('task');
-
-        const taskTitle = document.createElement('div');
-        taskTitle.classList.add('task__title');
-        taskTitle.textContent = taskText;
-        taskElement.appendChild(taskTitle);
-
-        const removeButton = document.createElement('a');
-        removeButton.classList.add('task__remove');
-        removeButton.innerHTML = '&times;';
-        taskElement.appendChild(removeButton);
-
-        removeButton.addEventListener('click', removeTask);
-
+        const taskElement = createTaskElement(taskText);
         tasksList.appendChild(taskElement);
         });
     }
