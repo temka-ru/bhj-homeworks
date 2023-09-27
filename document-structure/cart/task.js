@@ -17,7 +17,7 @@ function addProductToCart(event) {
     } else {
         const cartProductHTML = `
           <div class="cart__product" data-id="${productId}">
-              img class="cart__product-image" src="${productImage}">
+              <img class="cart__product-image" src="${productImage}">
               <div class="cart__product-count">${productQuantity}</div>
           </div>
         `;
