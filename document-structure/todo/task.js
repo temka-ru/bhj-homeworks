@@ -18,18 +18,11 @@ function addTask(event) {
 function createTaskElement(taskText) {
     const taskElement = document.createElement('div');
     taskElement.classList.add('task');
-    
-    const taskTitle = document.createElement('div');
-    taskTitle.classList.add('task__title');
-    taskTitle.textContent = taskText;
-    taskElement.appendChild(taskTitle);
-    
-    const removeButton = document.createElement('a');
-    removeButton.classList.add('task__remove');
-    removeButton.innerHTML = '&times;';
-    taskElement.appendChild(removeButton);
-    removeButton.addEventListener('click', removeTask);
-    
+    taskElement.innerHTML = `
+        <div class="task__title">${taskText}</div>
+        <a href="#" class="task__remove">&times;</a>
+    `;
+    taskElement.querySelector('.task__remove').addEventListener('click', removeTask);
     return taskElement;
 }
 
